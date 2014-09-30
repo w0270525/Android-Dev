@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Jon\'s Calculator</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="one">1</string>
     <string name="two">2</string>
@@ -21,6 +20,7 @@
     <string name="multiply">*</string>
     <string name="divide">/</string>
     <string name="equals">=</string>
-    <string name="output" />
+    <string name="output">0</string>
+    <string name="clear">C</string>
 
 </resources>
