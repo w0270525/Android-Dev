@@ -20,7 +20,7 @@
     <string name="multiply">*</string>
     <string name="divide">/</string>
     <string name="equals">=</string>
-    <string name="output">0</string>
+    <string name="output" />
     <string name="clear">C</string>
 
 </resources>

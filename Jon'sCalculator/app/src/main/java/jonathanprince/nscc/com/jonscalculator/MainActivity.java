@@ -7,12 +7,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
-
+import java.util.regex.*;
 
 
 public class MainActivity extends Activity {
 
-    EditText tvOutput;
+    TextView tvOutput;
     Button btnOne;
     Button btnTwo;
     Button btnThree;
@@ -31,6 +31,15 @@ public class MainActivity extends Activity {
     Button btnDivide;
     Button btnEqual;
     Button btnClear;
+
+    //Variables to assign entered content to a string.
+    String leftString="";
+    String rightString="";
+    String operator;
+
+    //Variables to assign strings to numbers
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +68,17 @@ public class MainActivity extends Activity {
         btnNine=(Button)findViewById(R.id.btnNine);
         btnZero=(Button)findViewById(R.id.btnZero);
 
-        tvOutput=(EditText)findViewById(R.id.tvOutput);
+        tvOutput=(TextView)findViewById(R.id.tvOutput);
 
         //and here goes nothing. On click listeners for every button.
         btnClear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //resets the calculator.
+                tvOutput.setText("");
+                leftString="";
+                rightString="";
 
             }
         });
@@ -83,12 +97,27 @@ public class MainActivity extends Activity {
         btnDecimal.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+//   /^(\d+\.?\d*|\.\d+)$/  ^/^(\d+\.?\d*|\.\d+)$/
+                String myRegex="/^(?=.)\\d*(\\.\\d{1,9})?$/";
+                if (myRegex.matches(rightString))
 
+                {
+                   tvOutput.setText("fail");
+                } if (rightString.equals(""))
+                {
+                   rightString="0.";
+                    tvOutput.setText(rightString);
+                }else
+                {
+                    rightString+=".";
+                    tvOutput.setText(rightString);
+                }
             }
         });
         btnDivide.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
             }
         });
@@ -101,6 +130,8 @@ public class MainActivity extends Activity {
         btnMinus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                //trapping needed
+
 
             }
         });
@@ -125,55 +156,73 @@ public class MainActivity extends Activity {
         btnOne.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+= "1";
+                tvOutput.setText(rightString);
             }
         });
         btnTwo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="2";
+                tvOutput.setText(rightString );
             }
         });
         btnThree.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="3";
+                tvOutput.setText(rightString);
             }
         });
         btnFour.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="4";
+                tvOutput.setText(rightString);
             }
         });
         btnFive.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="5";
+                tvOutput.setText(rightString);
             }
         });
         btnSix.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="6";
+                tvOutput.setText(rightString);
             }
         });
         btnSeven.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="7";
+               tvOutput.setText(rightString);
             }
         });
         btnEight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="8";
+                tvOutput.setText(rightString);
             }
         });
         btnNine.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rightString+="9";
+                tvOutput.setText(rightString);
+            }
+        });
+        btnZero.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rightString!="") {
+                    rightString += "0";
+                    tvOutput.setText(rightString);
+                }
             }
         });
     }
@@ -197,4 +246,61 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+public class myMath {
+
+    myMath(){
+
+    }
+
+    public String doMath(String operator) {
+        if (operator.equals("+")) {
+            return multiply(leftString, rightString);
+        }
+        else if
+                (operator.equals("-")) {
+            return minus(leftString, rightString);
+        } else if
+                (operator.equals("*")) {
+            return multiply(leftString, rightString);
+        } else
+                 {
+            return divide(leftString, rightString);
+        }
+
+
+    }
+
+    private String multiply(String leftSide, String rightSide) {
+
+        return String.valueOf(Double.parseDouble(leftSide) * Double.parseDouble(rightSide));
+
+    }
+
+    private String divide(String leftSide, String rightSide) {
+        if (rightSide=="0")
+        {
+            return "NaN";
+        }
+        return String.valueOf(Double.parseDouble(leftSide) / Double.parseDouble(rightSide));
+
+    }
+    private String minus(String leftSide, String rightSide) {
+
+        return String.valueOf(Double.parseDouble(leftSide) - Double.parseDouble(rightSide));
+    }
+    private String add(String leftSide, String rightSide) {
+
+        return String.valueOf(Double.parseDouble(leftSide) + Double.parseDouble(rightSide));
+    }
+
+
+}
+
+
+
+
+
 }

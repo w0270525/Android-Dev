@@ -9,18 +9,22 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:text="@string/output"
             android:id="@+id/tvOutput"
-            android:autoText="true"
-            android:textSize="36dp"
+            android:autoText="false"
+            android:textSize="24dp"
             android:layout_span="4"
             style="@style/AppTheme"
             android:height="56dp"
             android:gravity="right"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:inputType="none"
+            android:enabled="false"
+            android:background="#ffc4c4c4"
+            android:textColor="#ff000000" />
 
     </TableRow>
 
@@ -181,7 +185,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/clear"
-            android:id="@+id/button"
+            android:id="@+id/btnClear"
             android:layout_span="2"
             android:padding="10dp" />
 
