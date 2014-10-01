@@ -167,8 +167,10 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                //need to * -1
-                rightString= valueOf(Double.parseDouble(rightString) * (-1));
-                tvOutput.setText(rightString);
+                if(rightString!="") {
+                    rightString = valueOf(Double.parseDouble(rightString) * (-1));
+                    tvOutput.setText(rightString);
+                }
             }
         });
 
@@ -250,7 +252,12 @@ public class MainActivity extends Activity {
         btnZero.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rightString != "") {
+                if (rightString =="") {
+                    rightString="0";
+                    tvOutput.setText(rightString);
+                }else if(rightString == "0") {
+                    tvOutput.setText(rightString);
+                }else if(rightString != "") {
                     rightString += "0";
                     tvOutput.setText(rightString);
                 }
@@ -371,8 +378,13 @@ public class myMath {
     private String minus(String leftSide, String rightSide, String oldOperator, String newerOperator) {
 
         String temp;
-        temp=valueOf(Double.parseDouble(leftSide) - Double.parseDouble(rightSide));
-
+        double doubletemp = Double.parseDouble(rightString);
+        if(doubletemp < 0){
+            valueOf(Double.parseDouble(rightString) * (-1));
+            temp=valueOf(Double.parseDouble(leftSide) + Double.parseDouble(rightSide));
+        }else {
+            temp = valueOf(Double.parseDouble(leftSide) - Double.parseDouble(rightSide));
+        }
         operator=newerOperator;
         rightString="";
         leftString=temp;
