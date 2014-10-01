@@ -7,7 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
-import java.util.regex.*;
+
+//autoimport to take some of the String.ValueOf nonsense out.
+import static java.lang.String.valueOf;
 
 
 public class MainActivity extends Activity {
@@ -35,7 +37,8 @@ public class MainActivity extends Activity {
     //Variables to assign entered content to a string.
     String leftString="";
     String rightString="";
-    String operator;
+    String operator="";
+    String newOperator="";
 
     //Variables to assign strings to numbers
 
@@ -70,7 +73,10 @@ public class MainActivity extends Activity {
 
         tvOutput=(TextView)findViewById(R.id.tvOutput);
 
-        //and here goes nothing. On click listeners for every button.
+       //instantiate my math class to do all the heavy lifting.
+        final myMath calcMath=new myMath();
+
+       //and here goes nothing. On click listeners for every button.
         btnClear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,30 +92,50 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                newOperator="*";
+                tvOutput.setText(calcMath.doMath(operator, newOperator));
+
             }
         });
         btnZero.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(rightString.equals(""))
+                {
+                    rightString="0";
+                    tvOutput.setText(rightString);
+                }
+                if(rightString.equals("0"))
+                {
+                    tvOutput.setText(rightString);
+                }
+                else {
+
+                   tvOutput.setText(rightString+"0");
+                }
             }
         });
         btnDecimal.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-//   /^(\d+\.?\d*|\.\d+)$/  ^/^(\d+\.?\d*|\.\d+)$/
-                String myRegex="/^(?=.)\\d*(\\.\\d{1,9})?$/";
-                if (myRegex.matches(rightString))
+                //checks for any decimals.
+                if (rightString.matches("^[\\d]*$")) {
 
-                {
-                   tvOutput.setText("fail");
-                } if (rightString.equals(""))
+                    rightString+=".";
+                    tvOutput.setText(rightString);
+
+
+                }
+               //verifies if it is an empty string
+                else if (rightString.equals(""))
                 {
                    rightString="0.";
                     tvOutput.setText(rightString);
-                }else
+                }
+                else
                 {
-                    rightString+=".";
+
                     tvOutput.setText(rightString);
                 }
             }
@@ -118,13 +144,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-
+                newOperator="/";
+                tvOutput.setText(calcMath.doMath(operator, newOperator));
             }
         });
         btnEqual.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                newOperator="=";
+                tvOutput.setText(calcMath.doMath(operator, "="));
             }
         });
         btnMinus.setOnClickListener(new OnClickListener() {
@@ -132,27 +160,30 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 //trapping needed
 
-
+                tvOutput.setText(calcMath.doMath(operator, "-"));
             }
         });
         btnPlusMinus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               //need to * -1
+                rightString= valueOf(Double.parseDouble(rightString) * (-1));
+                tvOutput.setText(rightString);
             }
         });
+
         btnPlus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            }
-        });
-        btnMultiply.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+               String newText;
 
+              newText=calcMath.doMath(operator, "+");
+                tvOutput.setText(newText);
             }
         });
+
+
         btnOne.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,7 +250,7 @@ public class MainActivity extends Activity {
         btnZero.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rightString!="") {
+                if(rightString != "") {
                     rightString += "0";
                     tvOutput.setText(rightString);
                 }
@@ -255,45 +286,88 @@ public class myMath {
 
     }
 
-    public String doMath(String operator) {
-        if (operator.equals("+")) {
-            return multiply(leftString, rightString);
+    public  boolean decimalCheck(String rightSide) {
+
+        int decCount=0;
+
+
+
+        for (int i = 0 ; i <= rightSide.length() ; i++) {
+            char c = rightSide.charAt(i);
+           if (c=='.') {
+           decCount++;
+           }
+            if (decCount==1) {
+                return false;
+            }
         }
-        else if
-                (operator.equals("-")) {
-            return minus(leftString, rightString);
+
+     return true;
+
+    }
+
+    public String doMath(String perator, String newOperator) {
+        if(leftString="") {
+
+            operator = newOperator;
+            leftString = rightString;
+            rightString = "";
+            }
+
+
+
+
+        if (newOperator.equals("+")) {
+            return add(leftString, rightString, operator, newOperator);
         } else if
-                (operator.equals("*")) {
-            return multiply(leftString, rightString);
-        } else
-                 {
-            return divide(leftString, rightString);
+                (newOperator.equals("-")) {
+            return minus(leftString, rightString, operator, newOperator);
+        } else if
+                (newOperator.equals("*")) {
+            return multiply(leftString, rightString, operator,newOperator);
+        } else if
+                (newOperator.equals("/")) {
+            return divide(leftString, rightString, operator, newOperator);
+        } else if
+                (newOperator.equals("=")) {
+            equals(leftString, rightString, operator);
         }
 
 
+        if (operator=="") {
+            operator = newOperator;
+        }
+
+
+
+        //should never get here.
+        return "Error";
     }
 
-    private String multiply(String leftSide, String rightSide) {
+    private String multiply(String leftSide, String rightSide, String oldOperator, String newerOperator) {
 
-        return String.valueOf(Double.parseDouble(leftSide) * Double.parseDouble(rightSide));
+        return valueOf(Double.parseDouble(leftSide) * Double.parseDouble(rightSide));
 
     }
 
-    private String divide(String leftSide, String rightSide) {
-        if (rightSide=="0")
+    private String divide(String leftSide, String rightSide, String oldOperator, String newerOperator) {
+        if (rightSide.equals("0"))
         {
             return "NaN";
         }
-        return String.valueOf(Double.parseDouble(leftSide) / Double.parseDouble(rightSide));
+        return valueOf(Double.parseDouble(leftSide) / Double.parseDouble(rightSide));
 
     }
-    private String minus(String leftSide, String rightSide) {
+    private String minus(String leftSide, String rightSide, String oldOperator, String newerOperator) {
 
-        return String.valueOf(Double.parseDouble(leftSide) - Double.parseDouble(rightSide));
+        return valueOf(Double.parseDouble(leftSide) - Double.parseDouble(rightSide));
     }
-    private String add(String leftSide, String rightSide) {
+    private String add(String leftSide, String rightSide, String oldOperator, String newerOperator) {
 
-        return String.valueOf(Double.parseDouble(leftSide) + Double.parseDouble(rightSide));
+        return valueOf(Double.parseDouble(leftSide) + Double.parseDouble(rightSide));
+    }
+    private void equals(String leftSide, String rightSide, String oPerator) {
+        doMath(rightSide,oPerator);
     }
 
 
