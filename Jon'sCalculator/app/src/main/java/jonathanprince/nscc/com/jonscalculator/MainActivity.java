@@ -306,30 +306,31 @@ public class myMath {
 
     }
 
-    public String doMath(String perator, String newOperator) {
-        if(leftString="") {
+    public String doMath(String oldOperator, String newOperator) {
+        if(leftString.equals("")) {
 
             operator = newOperator;
             leftString = rightString;
             rightString = "";
+            return "";
             }
 
 
 
 
-        if (newOperator.equals("+")) {
+        if (oldOperator.equals("+")) {
             return add(leftString, rightString, operator, newOperator);
         } else if
-                (newOperator.equals("-")) {
+                (oldOperator.equals("-")) {
             return minus(leftString, rightString, operator, newOperator);
         } else if
-                (newOperator.equals("*")) {
+                (oldOperator.equals("*")) {
             return multiply(leftString, rightString, operator,newOperator);
         } else if
-                (newOperator.equals("/")) {
+                (oldOperator.equals("/")) {
             return divide(leftString, rightString, operator, newOperator);
         } else if
-                (newOperator.equals("=")) {
+                (oldOperator.equals("=")) {
             equals(leftString, rightString, operator);
         }
 
@@ -346,8 +347,12 @@ public class myMath {
 
     private String multiply(String leftSide, String rightSide, String oldOperator, String newerOperator) {
 
-        return valueOf(Double.parseDouble(leftSide) * Double.parseDouble(rightSide));
-
+        String temp;
+        temp=valueOf(Double.parseDouble(leftSide) * Double.parseDouble(rightSide));
+        operator=newerOperator;
+        rightString="";
+        leftString=temp;
+        return leftString;
     }
 
     private String divide(String leftSide, String rightSide, String oldOperator, String newerOperator) {
@@ -355,16 +360,32 @@ public class myMath {
         {
             return "NaN";
         }
-        return valueOf(Double.parseDouble(leftSide) / Double.parseDouble(rightSide));
+        String temp;
+        temp=valueOf(Double.parseDouble(leftSide) / Double.parseDouble(rightSide));
+        operator=newerOperator;
+        rightString="";
+        leftString=temp;
+        return leftString;
 
     }
     private String minus(String leftSide, String rightSide, String oldOperator, String newerOperator) {
 
-        return valueOf(Double.parseDouble(leftSide) - Double.parseDouble(rightSide));
+        String temp;
+        temp=valueOf(Double.parseDouble(leftSide) - Double.parseDouble(rightSide));
+
+        operator=newerOperator;
+        rightString="";
+        leftString=temp;
+        return leftString;
     }
     private String add(String leftSide, String rightSide, String oldOperator, String newerOperator) {
 
-        return valueOf(Double.parseDouble(leftSide) + Double.parseDouble(rightSide));
+        String temp;
+        temp=valueOf(Double.parseDouble(leftSide) + Double.parseDouble(rightSide));
+        operator=newerOperator;
+        rightString="";
+        leftString=temp;
+        return leftString;
     }
     private void equals(String leftSide, String rightSide, String oPerator) {
         doMath(rightSide,oPerator);
