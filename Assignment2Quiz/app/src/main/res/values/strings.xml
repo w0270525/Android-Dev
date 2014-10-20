@@ -12,5 +12,10 @@
     <string name="titleQuestion">Question </string>
     <string name="questionNumber" />
     <string name="txtCurrentQuestion" />
+    <string name="btnA" />
+    <string name="btnB" />
+    <string name="btnC" />
+    <string name="btnD" />
+    <string name="currentQuestion" />
 
 </resources>
