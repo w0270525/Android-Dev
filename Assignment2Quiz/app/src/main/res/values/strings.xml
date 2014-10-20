@@ -5,8 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="txtWelcome">Welcome to the Quiz!</string>
-    <string name="editName" />
+    <string name="editName"></string>
     <string name="nameHint">Enter your name</string>
     <string name="btnQuizStart">Start the Quiz!</string>
+    <string name="title_activity_quiz">QuizActivity</string>
 
 </resources>
