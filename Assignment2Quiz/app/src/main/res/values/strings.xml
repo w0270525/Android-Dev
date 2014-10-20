@@ -9,5 +9,8 @@
     <string name="nameHint">Enter your name</string>
     <string name="btnQuizStart">Start the Quiz!</string>
     <string name="title_activity_quiz">QuizActivity</string>
+    <string name="titleQuestion">Question </string>
+    <string name="questionNumber" />
+    <string name="txtCurrentQuestion" />
 
 </resources>
