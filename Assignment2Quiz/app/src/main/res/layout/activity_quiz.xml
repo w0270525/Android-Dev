@@ -84,5 +84,8 @@
         android:id="@+id/currentQuestion"
         android:layout_alignTop="@+id/txtCurrentQuestion"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/btnA" />
 </RelativeLayout>

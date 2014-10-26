@@ -24,7 +24,7 @@
         android:inputType="textPersonName"
         android:text="@string/editName"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/editName"
         android:hint="@string/nameHint"
         android:layout_above="@+id/btnStartQuiz"
         android:layout_centerHorizontal="true"
@@ -36,5 +36,6 @@
         android:text="@string/btnQuizStart"
         android:id="@+id/btnStartQuiz"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="doStuff" />
 </RelativeLayout>
