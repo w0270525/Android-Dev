@@ -18,18 +18,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="28sp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/editName"
-        android:ems="10"
-        android:id="@+id/editName"
-        android:hint="@string/nameHint"
-        android:layout_above="@+id/btnStartQuiz"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="39dp" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,5 +25,16 @@
         android:id="@+id/btnStartQuiz"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:onClick="doStuff" />
+        android:onClick="startQuiz" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="@string/editName"
+        android:ems="10"
+        android:id="@+id/editName"
+        android:layout_below="@+id/welcomeText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp" />
 </RelativeLayout>

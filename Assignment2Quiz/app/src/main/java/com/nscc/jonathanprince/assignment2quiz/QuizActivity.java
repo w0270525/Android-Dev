@@ -15,6 +15,14 @@ public class QuizActivity extends Activity {
         setContentView(R.layout.activity_quiz);
 
         //check for name value and send by intent to QuizActivity
+
+        String defaultName="";
+        Bundle extras= getIntent().getExtras();
+        if(extras!=null)
+        {
+            defaultName = extras.getString("NAME");
+
+        }
     }
 
 
