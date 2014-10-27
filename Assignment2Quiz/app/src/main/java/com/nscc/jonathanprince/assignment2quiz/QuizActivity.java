@@ -1,10 +1,29 @@
 package com.nscc.jonathanprince.assignment2quiz;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.*;
+
+//brought in from FileIO demo
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.File;
+import java.io.OutputStream;
+import java.io.InputStream;
+import java.io.BufferedReader;
+import net.learn2develop.Files.String;
+
+//brought in from hashmap
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
 
 
 public class QuizActivity extends Activity {
@@ -22,6 +41,30 @@ public class QuizActivity extends Activity {
         {
             defaultName = extras.getString("NAME");
 
+
+/* hashmap example. remove before finalizing.
+            Map<String,String> map = new HashMap<String,String>();//create HM obj
+            map.put("Color1", "Red");
+            map.put("Color2", "Blue");
+            map.put("Color3", "Green");
+            map.put("Color4", "White");
+
+            Iterator<String> myIterator = map.values().iterator();//create iterator obj
+            Context context = getApplicationContext();
+
+            while(myIterator.hasNext())//display colors using toast
+            {
+                //Toast.makeText(getBaseContext(),myIterator.next(),Toast.LENGTH_SHORT).show();
+
+                CharSequence  text = myIterator.next();//set up string
+                int duration = Toast.LENGTH_LONG;//set up the timing
+                Toast toast = Toast.makeText(context, text, duration);//create Toast obj
+                toast.show();//call method of toast obj to display toast
+            }
+
+            map.get("Color1");//to take a key to the hash and get a value back
+
+*/
         }
     }
 
