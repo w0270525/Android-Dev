@@ -18,15 +18,21 @@ import java.io.File;
 import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.BufferedReader;
-import net.learn2develop.Files.String;
+//import net.learn2develop.Files.String;
 
 //brought in from hashmap
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 
-
+//class for main quiz portion of the app.
 public class QuizActivity extends Activity {
+
+    int questionNumbers=10;//number of questions to create/allow.
+    int score=0;//a variable to keep track of scoring
+    int questionCounter=0; //variable to keep track of what question the user is on.
+    String question;
+    String answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,20 @@ public class QuizActivity extends Activity {
         Bundle extras= getIntent().getExtras();
         if(extras!=null)
         {
-            defaultName = extras.getString("NAME");
+            defaultName = extras.getString("NAME");//name entered on first screen.
+
+            try {
+                FileInputStream fIn = openFileInput("quiz.txt");
+                InputStreamReader isr = new InputStreamReader(fIn);
+
+
+
+
+            }catch(IOException ioe){
+                ioe.printStackTrace();
+            }
+
+
 
 
 /* hashmap example. remove before finalizing.
