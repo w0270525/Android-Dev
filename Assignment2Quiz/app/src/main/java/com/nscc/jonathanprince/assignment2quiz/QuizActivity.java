@@ -61,7 +61,7 @@ public class QuizActivity extends Activity {
 
 
 
-/* hashmap example. remove before finalizing.
+/*  TODO hashmap example. remove before finalizing.
             Map<String,String> map = new HashMap<String,String>();//create HM obj
             map.put("Color1", "Red");
             map.put("Color2", "Blue");
