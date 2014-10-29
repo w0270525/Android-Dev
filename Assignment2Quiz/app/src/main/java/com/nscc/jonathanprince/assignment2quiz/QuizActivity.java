@@ -14,13 +14,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.File;
+//for SD card. not used
+//import java.io.File;
 import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.BufferedReader;
-//import net.learn2develop.Files.String;
+
 
 //brought in from hashmap
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
@@ -28,16 +31,20 @@ import java.util.Iterator;
 //class for main quiz portion of the app.
 public class QuizActivity extends Activity {
 
+    private static final int READ_BLOCK_SIZE = 100;
+
     int questionNumbers=10;//number of questions to create/allow.
     int score=0;//a variable to keep track of scoring
     int questionCounter=0; //variable to keep track of what question the user is on.
-    String question;
-    String answer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
+        ArrayList<String> answer = new ArrayList<String>();
+        ArrayList<String> question = new ArrayList<String>();
 
         //check for name value and send by intent to QuizActivity
 
@@ -51,7 +58,21 @@ public class QuizActivity extends Activity {
                 FileInputStream fIn = openFileInput("quiz.txt");
                 InputStreamReader isr = new InputStreamReader(fIn);
 
+                char[] inputBuffer = new char[READ_BLOCK_SIZE];
 
+
+                int charRead;
+                while ((charRead = isr.read(inputBuffer))>0)
+                {
+                    //---convert the chars to a String---
+                s += readString;
+
+                    inputBuffer = new char[READ_BLOCK_SIZE];
+                }
+
+
+                answer.add(ar[0]);
+                question.add(ar[1]);
 
 
             }catch(IOException ioe){
@@ -84,8 +105,8 @@ public class QuizActivity extends Activity {
             map.get("Color1");//to take a key to the hash and get a value back
 
 */
-        }
-    }
+        }//end if(extras!=null)
+    }//end onCreate
 
 
     @Override
