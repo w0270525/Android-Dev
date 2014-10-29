@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:text="@string/btnQuizStart"
         android:id="@+id/btnStartQuiz"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="startQuiz" />
+        android:onClick="startQuiz"
+        android:layout_below="@+id/editName"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"

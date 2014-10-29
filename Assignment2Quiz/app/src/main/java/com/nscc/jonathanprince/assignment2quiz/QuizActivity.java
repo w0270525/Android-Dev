@@ -12,6 +12,7 @@ import android.widget.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -31,6 +32,7 @@ import java.util.Map;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 //class for main quiz portion of the app.
 public class QuizActivity extends Activity {
@@ -60,32 +62,44 @@ public class QuizActivity extends Activity {
         {
             defaultName = extras.getString("NAME");//name entered on first screen.
 
-            try {
-                //File f = new File( getFilesDir(), "raw/quiz.txt");
-               Scanner scanner;
-                scanner = new Scanner(getAssets().open(("quiz")));
-                        scanner.useDelimiter(";");
-                int count=0;
-                while (scanner.nextLine()!=null){
 
-                    count++;
-                    answer.add(scanner.next());
-                    question.add(scanner.next());
-                    map.put(answer.get(count),question.get(count));
+            String entry="";
+            try {
+                Context ctx = this.getApplicationContext();
+                int i = this.getResources().getIdentifier
+                        ("questions","raw", this.getPackageName());
+                InputStream iStream = ctx.getResources().openRawResource(R.raw.quiz );
+                InputStreamReader iReader = new InputStreamReader(iStream);
+                BufferedReader bReader = new BufferedReader(iReader); //
+
+
+
+                while (( entry = bReader.readLine()) != null) {
+
+
+
+                    String[] result=entry.split(";");//splits the line into two parts
+                    answer.add(result[0]);
+                    question.add(result[1]);
+                    map.put(answer.get(questionCounter), question.get(questionCounter));//sets the hashmap question and answer together
+                    questionCounter++;//adds to be the next question
+
 
                 }
-            scanner.close();
 
 
-            }catch(IOException ioe){
+                }catch(IOException ioe){
                 ioe.printStackTrace();
             }
 
             //randomizes the question order after it's been created and mapped.
             long seed = System.nanoTime();
-            Collections.shuffle(answer, new Random(seed));
             Collections.shuffle(question, new Random(seed));
 
+            for (int i=0;i<questionNumbers;i++) {
+                nextQuestion();
+
+            }
 
 /*  TODO hashmap example. remove before finalizing.
             Map<String,String> map = new HashMap<String,String>();//create HM obj
@@ -136,7 +150,7 @@ public class QuizActivity extends Activity {
     //does all the work of setting up the next question for the screen
     private void nextQuestion(){
 
-        txtCurrentQuestion
+        txtCurrentQuestion=(TextView)findViewById(R.id.txtCurrentQuestion);
     }
 
 }
