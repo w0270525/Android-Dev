@@ -3,19 +3,20 @@ package com.nscc.jonathanprince.assignment2quiz;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.view.View;
 import android.widget.*;
 
+import java.util.ArrayList;
+
 
 //class for main quiz portion of the app.
 public class QuizActivity extends Activity {
 
 //variables for the view
-
-
     TextView currentQuestion;//=(TextView)findViewById(R.id.currentQuestion);
     TextView questionNumber;//=(TextView)findViewById(R.id.questionNumber);
     TextView txtScore;
@@ -23,7 +24,8 @@ public class QuizActivity extends Activity {
     Button btnB;//=(Button)findViewById(R.id.btnB);
     Button btnC;//=(Button)findViewById(R.id.btnC);
     Button btnD;//=(Button)findViewById(R.id.btnD);
-    Context ctx = this.getApplicationContext();
+
+    //other variables used.
     Quiz quiz;
     String defaultName = "";//default name, should never come in like this.
 
@@ -45,9 +47,11 @@ public class QuizActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             defaultName = extras.getString("NAME");//name entered on first screen.
+            Context ctx = this.getApplicationContext();
 
+            //assigns new quiz object
             quiz = new Quiz(ctx);
-
+            firstQuestion();
 
         }//end if(extras!=null)
         else {//will send back to the first screen if they somehow have no name entered.
@@ -55,6 +59,12 @@ public class QuizActivity extends Activity {
             startActivity(intent);
         }
     }//end onCreate
+
+    private void firstQuestion() {
+        quiz.getQuestion(quiz.getQuestionCounter());
+        currentQuestion.setText(quiz.getQuestion(quiz.getQuestionCounter()));
+
+    }
 
 
     @Override
@@ -75,29 +85,33 @@ public class QuizActivity extends Activity {
     private void nextQuestion() {
 
 
-        quiz.setQuestionCounter();
-        currentQuestion.setText(quiz.getQuestionCounter());
-        if(quiz.getQuestionCounter()!=quiz.getQuestionLimit()){
-            //update score
-            txtScore.setText("Score: " + quiz.getScore()+ " out of " + quiz.getQuestionCounter());
+        try {
+            quiz.setQuestionCounter();
+            questionNumber.setText(quiz.getQuestionCounter());
+            if (quiz.getQuestionCounter() != quiz.getQuestionLimit()) {
+                //update score
+                txtScore.setText("Score: " + quiz.getScore() + " out of " + quiz.getQuestionCounter());
 
-            currentQuestion.setText(quiz.getQuestion(quiz.getQuestionCounter()));
+                currentQuestion.setText(quiz.getQuestion(quiz.getQuestionCounter()));
+                ArrayList<String> ar= quiz.fourAnswers(currentQuestion.getText().toString());
 
 
 
-        }else
-        {
+            } else {
 
-            //toast detailing the score and echoing the entered name.
-            Toast.makeText(QuizActivity.this, "Your final score was: " +quiz.getScore()+
-                    ", good job " +defaultName+"!",Toast.LENGTH_LONG).show();
+                //toast detailing the score and echoing the entered name.
+                Toast.makeText(QuizActivity.this, "Your final score was: " + quiz.getScore() +
+                        ", good job " + defaultName + "!", Toast.LENGTH_LONG).show();
 
-            //send back to first page
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+                //send back to first page
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
 
+            }
+
+        }catch(NullPointerException n){
+            n.printStackTrace();
         }
-
 
 
         //update question

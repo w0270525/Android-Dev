@@ -15,10 +15,13 @@ import java.util.Random;
 
 public class Quiz {
 
+    private static final int QUESTION_LIMIT = 10;//number of questions to create/allow.
+
     private ArrayList<String> answer;
     private ArrayList<String> question;
     private Map<String, String> map;
-    private int questionLimit = 10;//number of questions to create/allow.
+
+
     private int score = 0;//a variable to keep track of scoring
     private int questionCounter = 0; //variable to keep track of what question the user is on.
 
@@ -71,13 +74,34 @@ public class Quiz {
     private void shuffleQ() {
         long seed = System.nanoTime();
         Collections.shuffle(question, new Random(seed));
+        Collections.shuffle(answer, new Random(seed));
     }
 
-    public void fourAnswers(){
+    public ArrayList<String> fourAnswers(String qtion){
         //hoping to take actual answer and the top 3 from the shuffled list, then assign them to buttons randomly.
+
+        int ansvalue;
+        long seed=System.nanoTime();
+        Random random = new Random(seed);
+        ArrayList<String> ar=new ArrayList<String>();//temporary array to send away
+        ArrayList<String> tempAns=answer;//assign temparry the answer array to be scrambled
+
+        Collections.shuffle(tempAns, new Random(seed));
+
+        ansvalue=random.nextInt(4) + 1;
 
         Collections.shuffle(answer);
 
+        for (int i=0;i<4;i++){
+            if (qtion.equals(map.get(answer.get(i)))){
+                ar.add(answer.get(5));//do this to remove duplicate entries of the answer
+            }else if(ansvalue == i){
+                ar.add(
+            }
+        }
+
+
+        return ar;
     }
 
 
@@ -89,9 +113,6 @@ public class Quiz {
 
     }
 
-    public String getAnswer(int num) {
-        return answer.get(num);
-    }
 
 
 
@@ -104,7 +125,7 @@ public class Quiz {
     }
 
     public int getQuestionLimit() {
-        return questionLimit;
+        return QUESTION_LIMIT;
     }
 
 
