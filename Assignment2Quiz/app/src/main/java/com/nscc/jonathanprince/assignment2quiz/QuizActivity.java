@@ -59,9 +59,7 @@ public class QuizActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        ArrayList<String> answer = new ArrayList<String>();//declare my question and answer arrays.
-        ArrayList<String> question = new ArrayList<String>();
-        Map<String,String> map = new HashMap<String,String>();
+        //removed arraylist and map here
 
         //check for name value and send by intent to QuizActivity
 
@@ -71,13 +69,13 @@ public class QuizActivity extends Activity {
         {
             defaultName = extras.getString("NAME");//name entered on first screen.
 
-
+            readFile();
             String entry="";
             try {
                 Context ctx = this.getApplicationContext();
                 int i = this.getResources().getIdentifier
                         ("questions","raw", this.getPackageName());
-                InputStream iStream = ctx.getResources().openRawResource(R.raw.quiz );
+                InputStream iStream = ctx.getResources().openRawResource(R.raw.quiz );//This seemed to be the magic line to get it to read the file.
                 InputStreamReader iReader = new InputStreamReader(iStream);
                 BufferedReader bReader = new BufferedReader(iReader); //
 
@@ -87,7 +85,7 @@ public class QuizActivity extends Activity {
 
 
 
-                    String[] result=entry.split(";");//splits the line into two parts
+                    String[] result=entry.split(";");//splits the line into two parts. file should only have two results per line.
                     answer.add(result[0]);
                     question.add(result[1]);
                     map.put(answer.get(questionCounter), question.get(questionCounter));//sets the hashmap question and answer together
@@ -102,6 +100,7 @@ public class QuizActivity extends Activity {
             }
 
             //randomizes the question order after it's been created and mapped.
+
             long seed = System.nanoTime();
             Collections.shuffle(question, new Random(seed));
 
@@ -134,7 +133,13 @@ public class QuizActivity extends Activity {
 
 */
         }//end if(extras!=null)
+        else {//will send back to the first screen if they somehow have no name entered.
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }//end onCreate
+
+
 
 
     @Override
@@ -150,10 +155,7 @@ public class QuizActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
     //does all the work of setting up the next question for the screen
@@ -169,6 +171,7 @@ public class QuizActivity extends Activity {
         //update buttons
     }
 
+    //onclick listener function
     public void answerButton(View v)
     {
 
@@ -178,6 +181,11 @@ public class QuizActivity extends Activity {
 
         //call for next question
 
+    }//end answerButton listener
+
+    private void readFile(){
+
+
     }
 
-}
+}//end class
