@@ -32,8 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+
 
 //class for main quiz portion of the app.
 public class QuizActivity extends Activity {
@@ -45,12 +44,14 @@ public class QuizActivity extends Activity {
     int questionCounter=0; //variable to keep track of what question the user is on.
 
 //variables for the view
-    TextView txtCurrentQuestion=(TextView)findViewById(R.id.txtCurrentQuestion);
-    TextView txtQuestionNumber=(TextView)findViewById(R.id.questionNumber);
-    Button btnA= (Button) findViewById(R.id.btnA);
-    Button btnB=(Button)findViewById(R.id.btnB);
-    Button btnC=(Button)findViewById(R.id.btnC);
-    Button btnD=(Button)findViewById(R.id.btnD);
+
+
+    TextView currentQuestion;//=(TextView)findViewById(R.id.currentQuestion);
+    TextView questionNumber;//=(TextView)findViewById(R.id.questionNumber);
+    Button btnA;//= (Button) findViewById(R.id.btnA);
+    Button btnB;//=(Button)findViewById(R.id.btnB);
+    Button btnC;//=(Button)findViewById(R.id.btnC);
+    Button btnD;//=(Button)findViewById(R.id.btnD);
 
 
 
@@ -171,17 +172,26 @@ public class QuizActivity extends Activity {
         //update buttons
     }
 
-    //onclick listener function
-    public void answerButton(View v)
+    //onclick listener function inputs selected answer for
+    public void aButton(View v)
     {
 
+    }//end aButton listener
+    //onclick listener function inputs selected answer for
+    public void bButton(View v)
+    {
 
-        //check answer for match in hash
+    }//end aButton listener
+    //onclick listener function inputs selected answer for
+    public void cButton(View v)
+    {
 
+    }//end aButton listener
+    //onclick listener function inputs selected answer for
+    public void dButton(View v)
+    {
 
-        //call for next question
-
-    }//end answerButton listener
+    }//end aButton listener
 
     private void readFile(){
 

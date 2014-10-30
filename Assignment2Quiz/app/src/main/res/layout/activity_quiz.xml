@@ -38,7 +38,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="answerButton" />
+        android:onClick="cButton" />
 
     <Button
         android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_below="@+id/btnC"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="answerButton" />
+        android:onClick="dButton" />
 
     <Button
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         android:layout_above="@+id/btnC"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="answerButton" />
+        android:onClick="bButton" />
 
     <Button
         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:text="@string/btnA"
-        android:onClick="answerButton" />
+        android:onClick="aButton" />
 
     <TextView
         android:layout_width="wrap_content"

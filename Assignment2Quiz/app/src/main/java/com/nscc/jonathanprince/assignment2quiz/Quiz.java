@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by jonathan on 10/29/14.
- */
+
 public class Quiz {
 
     private ArrayList<String> answer;
@@ -16,7 +14,7 @@ public class Quiz {
     //default constructor
     public Quiz(){
 
-        answer = new ArrayList<String>();//declare my question and answer arrays.
+        setAnswer(new ArrayList<String>());//declare my question and answer arrays.
         question = new ArrayList<String>();
         map = new HashMap<String,String>();
 
@@ -29,7 +27,7 @@ public class Quiz {
     }
     public String getAnswer(int num){
 
-        return answer.get(num);
+        return getAnswer().get(num);
     }
 
     //checks to see if the question matches what is in the hash map for an answer
@@ -38,5 +36,13 @@ public class Quiz {
 
         return que.equals(map.get(ans));
 
+    }
+
+    public ArrayList<String> getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(ArrayList<String> answer) {
+        this.answer = answer;
     }
 }
