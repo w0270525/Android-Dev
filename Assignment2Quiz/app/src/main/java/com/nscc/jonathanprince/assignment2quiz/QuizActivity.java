@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -62,8 +63,18 @@ public class QuizActivity extends Activity {
 
     private void firstQuestion() {
         quiz.getQuestion(quiz.getQuestionCounter());
+       // questionNumber.setText(quiz.getQuestionCounter());
         currentQuestion.setText(quiz.getQuestion(quiz.getQuestionCounter()));
+        ArrayList<String> ar= quiz.fourAnswers(currentQuestion.getText().toString());
 
+        try {
+            btnA.setText(ar.get(0));
+            btnB.setText(ar.get(1));
+            btnC.setText(ar.get(2));
+            btnD.setText(ar.get(3));
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -87,7 +98,7 @@ public class QuizActivity extends Activity {
 
         try {
             quiz.setQuestionCounter();
-            questionNumber.setText(quiz.getQuestionCounter());
+//            questionNumber.setText(quiz.getQuestionCounter());
             if (quiz.getQuestionCounter() != quiz.getQuestionLimit()) {
                 //update score
                 txtScore.setText("Score: " + quiz.getScore() + " out of " + quiz.getQuestionCounter());
@@ -95,8 +106,10 @@ public class QuizActivity extends Activity {
                 currentQuestion.setText(quiz.getQuestion(quiz.getQuestionCounter()));
                 ArrayList<String> ar= quiz.fourAnswers(currentQuestion.getText().toString());
 
-
-
+                btnA.setText(ar.get(0));
+                btnB.setText(ar.get(1));
+                btnC.setText(ar.get(2));
+                btnD.setText(ar.get(3));
             } else {
 
                 //toast detailing the score and echoing the entered name.

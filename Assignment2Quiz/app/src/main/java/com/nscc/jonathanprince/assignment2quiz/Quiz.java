@@ -81,24 +81,41 @@ public class Quiz {
         //hoping to take actual answer and the top 3 from the shuffled list, then assign them to buttons randomly.
 
         int ansvalue;
-        long seed=System.nanoTime();
-        Random random = new Random(seed);
+        long seed2=System.nanoTime();
+        Random random = new Random(seed2);
         ArrayList<String> ar=new ArrayList<String>();//temporary array to send away
         ArrayList<String> tempAns=answer;//assign temparry the answer array to be scrambled
 
-        Collections.shuffle(tempAns, new Random(seed));
+        Collections.shuffle(tempAns, new Random(seed2));//shuffles the temparry
 
         ansvalue=random.nextInt(4) + 1;
 
-        Collections.shuffle(answer);
+
 
         for (int i=0;i<4;i++){
-            if (qtion.equals(map.get(answer.get(i)))){
-                ar.add(answer.get(5));//do this to remove duplicate entries of the answer
-            }else if(ansvalue == i){
-                ar.add(
+            if(ansvalue == i){
+                //handles random button placement of the answer(i hope)
+                int test=0;
+                do {
+                    if (qtion.equals(map.get(answer.get(test)))) {
+                     test++;
+                        ar.add(answer.get(test));
+                    }
+                    test++;
+
+
+                }while(!qtion.equals(map.get(answer.get(test)))|| test>9);
             }
+            else if (qtion.equals(map.get(answer.get(i)))){
+                ar.add(answer.get(5));//do this to remove duplicate entries of the answer
+
+            }else{
+                ar.add(answer.get(i));
+            }
+
+
         }
+
 
 
         return ar;
