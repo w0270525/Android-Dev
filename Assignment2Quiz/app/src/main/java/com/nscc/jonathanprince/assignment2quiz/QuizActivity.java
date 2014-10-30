@@ -84,13 +84,13 @@ public class QuizActivity extends Activity {
                 while (( entry = bReader.readLine()) != null) {
 
 
-
+/*
                     String[] result=entry.split(";");//splits the line into two parts. file should only have two results per line.
                     answer.add(result[0]);
                     question.add(result[1]);
                     map.put(answer.get(questionCounter), question.get(questionCounter));//sets the hashmap question and answer together
                     questionCounter++;//adds to be the next question
-
+*/
 
                 }
 
@@ -100,14 +100,14 @@ public class QuizActivity extends Activity {
             }
 
             //randomizes the question order after it's been created and mapped.
-
+/*
             long seed = System.nanoTime();
             Collections.shuffle(question, new Random(seed));
 
             for (int i=0;i<questionLimit;i++) {
-                nextQuestion();
+                nextQuestion();}*/
 
-            }
+
 
 /*  TODO hashmap example. remove before finalizing.
             Map<String,String> map = new HashMap<String,String>();//create HM obj
