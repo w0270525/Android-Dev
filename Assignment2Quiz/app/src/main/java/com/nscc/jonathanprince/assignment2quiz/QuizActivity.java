@@ -39,9 +39,7 @@ public class QuizActivity extends Activity {
 
 
 //variables for running the game
-    int questionLimit=10;//number of questions to create/allow.
-    int score=0;//a variable to keep track of scoring
-    int questionCounter=0; //variable to keep track of what question the user is on.
+
 
 //variables for the view
 
@@ -60,45 +58,19 @@ public class QuizActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        //removed arraylist and map here
-
-        //check for name value and send by intent to QuizActivity
 
         String defaultName="";//default name, should never come in like this.
         Bundle extras= getIntent().getExtras();
         if(extras!=null)
         {
             defaultName = extras.getString("NAME");//name entered on first screen.
+            Context ctx = this.getApplicationContext();
 
-            readFile();
-            String entry="";
-            try {
-                Context ctx = this.getApplicationContext();
-                int i = this.getResources().getIdentifier
-                        ("questions","raw", this.getPackageName());
-                InputStream iStream = ctx.getResources().openRawResource(R.raw.quiz );//This seemed to be the magic line to get it to read the file.
-                InputStreamReader iReader = new InputStreamReader(iStream);
-                BufferedReader bReader = new BufferedReader(iReader); //
+            //initialize new quiz
+            Quiz quiz=new Quiz(ctx);
 
 
 
-                while (( entry = bReader.readLine()) != null) {
-
-
-/*
-                    String[] result=entry.split(";");//splits the line into two parts. file should only have two results per line.
-                    answer.add(result[0]);
-                    question.add(result[1]);
-                    map.put(answer.get(questionCounter), question.get(questionCounter));//sets the hashmap question and answer together
-                    questionCounter++;//adds to be the next question
-*/
-
-                }
-
-
-                }catch(IOException ioe){
-                ioe.printStackTrace();
-            }
 
             //randomizes the question order after it's been created and mapped.
 /*
@@ -172,26 +144,30 @@ public class QuizActivity extends Activity {
         //update buttons
     }
 
-    //onclick listener function inputs selected answer for
+    //onclick listener function inputs selected answer for a
     public void aButton(View v)
     {
+        btnA=(Button)findViewById(R.id.btnA)
 
     }//end aButton listener
-    //onclick listener function inputs selected answer for
+
+    //onclick listener function inputs selected answer for b
     public void bButton(View v)
     {
 
-    }//end aButton listener
-    //onclick listener function inputs selected answer for
+    }//end bButton listener
+
+    //onclick listener function inputs selected answer for c
     public void cButton(View v)
     {
 
-    }//end aButton listener
-    //onclick listener function inputs selected answer for
+    }//end cButton listener
+
+    //onclick listener function inputs selected answer for d
     public void dButton(View v)
     {
 
-    }//end aButton listener
+    }//end dButton listener
 
     private void readFile(){
 
