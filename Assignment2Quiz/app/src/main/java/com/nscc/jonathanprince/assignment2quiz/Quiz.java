@@ -51,7 +51,8 @@ public class Quiz {
 
             /*int i = this.getResources().getIdentifier
                     ("questions","raw", this.getPackageName());*/
-            InputStream iStream = ctx.getResources().openRawResource(R.raw.easyquiz);//This seemed to be the magic line to get it to read the file.
+            InputStream iStream = ctx.getResources().openRawResource(R.raw.quiz);//This seemed to be the magic line to get it to read the file.
+            //iStream = ctx.getResources().openRawResource(R.raw.easyquiz);//this line enables debug quiz file
             InputStreamReader iReader = new InputStreamReader(iStream);
             BufferedReader bReader = new BufferedReader(iReader); //
 
