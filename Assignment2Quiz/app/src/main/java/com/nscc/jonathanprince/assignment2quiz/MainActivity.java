@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.*;
 
 import android.widget.Toast;
@@ -15,18 +14,15 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-
     }
 
-//button onclicklistener for starting the game.
+    //button onclicklistener for starting the game.
     public void startQuiz(View v) {
 
 //http://developer.android.com/training/basics/firstapp/starting-activity.html
@@ -37,14 +33,12 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(this, QuizActivity.class);
 
             intent.putExtra("NAME", message);
-            Toast.makeText(MainActivity.this, "Welcome, " + editText.getText() + ", good luck.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Welcome " + editText.getText() + ", good luck.", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         } else {
             Toast.makeText(MainActivity.this, "Please enter a name for record keeping purposes.", Toast.LENGTH_SHORT).show();
         }
-        }
-
-
+    }
 
 
     @Override

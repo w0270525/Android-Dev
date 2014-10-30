@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 
 public class Quiz {
@@ -17,9 +18,9 @@ public class Quiz {
     private ArrayList<String> answer;
     private ArrayList<String> question;
     private Map<String, String> map;
-    int questionLimit = 10;//number of questions to create/allow.
-    int score = 0;//a variable to keep track of scoring
-    int questionCounter = 0; //variable to keep track of what question the user is on.
+    private int questionLimit = 10;//number of questions to create/allow.
+    private int score = 0;//a variable to keep track of scoring
+    private int questionCounter = 0; //variable to keep track of what question the user is on.
 
     //default constructor
     public Quiz(Context ctx) {
@@ -46,6 +47,7 @@ public class Quiz {
 
             while ((entry = bReader.readLine()) != null) {
 
+                //i'm very much aware of how messy this is getting
 
                 String[] result = entry.split(";");//splits the line into two parts. file should only have two results per line.
                 answer.add(result[0]);//not using full OOP here
@@ -67,7 +69,8 @@ public class Quiz {
 
     //mixes order of questions
     private void shuffleQ() {
-        Collections.shuffle(question);
+        long seed = System.nanoTime();
+        Collections.shuffle(question, new Random(seed));
     }
 
     public void fourAnswers(){
@@ -110,16 +113,16 @@ public class Quiz {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void addScore() {
+        this.score = score+1;
     }
 
     public int getQuestionCounter() {
         return questionCounter;
     }
 
-    public void setQuestionCounter(int questionCounter) {
-        this.questionCounter = questionCounter;
+    public void setQuestionCounter() {
+        this.questionCounter = questionCounter +1;
     }
 }
 

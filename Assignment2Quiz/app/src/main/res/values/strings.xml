@@ -18,5 +18,6 @@
     <string name="btnD" />
     <string name="currentQuestion" />
     <string name="editName" />
+    <string name="txtScore">Score:</string>
 
 </resources>
