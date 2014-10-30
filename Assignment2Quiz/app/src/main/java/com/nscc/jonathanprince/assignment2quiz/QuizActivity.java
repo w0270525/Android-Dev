@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.view.View;
 import android.widget.*;
 
 //brought in from FileIO demo
@@ -38,12 +39,20 @@ import java.util.StringTokenizer;
 public class QuizActivity extends Activity {
 
 
-
-    int questionNumbers=10;//number of questions to create/allow.
+//variables for running the game
+    int questionLimit=10;//number of questions to create/allow.
     int score=0;//a variable to keep track of scoring
     int questionCounter=0; //variable to keep track of what question the user is on.
 
-    TextView txtCurrentQuestion;
+//variables for the view
+    TextView txtCurrentQuestion=(TextView)findViewById(R.id.txtCurrentQuestion);
+    TextView txtQuestionNumber=(TextView)findViewById(R.id.questionNumber);
+    Button btnA= (Button) findViewById(R.id.btnA);
+    Button btnB=(Button)findViewById(R.id.btnB);
+    Button btnC=(Button)findViewById(R.id.btnC);
+    Button btnD=(Button)findViewById(R.id.btnD);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +105,7 @@ public class QuizActivity extends Activity {
             long seed = System.nanoTime();
             Collections.shuffle(question, new Random(seed));
 
-            for (int i=0;i<questionNumbers;i++) {
+            for (int i=0;i<questionLimit;i++) {
                 nextQuestion();
 
             }
@@ -150,7 +159,25 @@ public class QuizActivity extends Activity {
     //does all the work of setting up the next question for the screen
     private void nextQuestion(){
 
-        txtCurrentQuestion=(TextView)findViewById(R.id.txtCurrentQuestion);
+
+        //update score
+
+
+        //update question
+
+
+        //update buttons
+    }
+
+    public void answerButton(View v)
+    {
+
+
+        //check answer for match in hash
+
+
+        //call for next question
+
     }
 
 }
