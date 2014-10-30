@@ -1,12 +1,14 @@
 package com.nscc.jonathanprince.assignment2quiz;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,14 @@ public class Quiz {
     private ArrayList<String> question;
     private Map<String, String> map;
 
+
+    public void setQuestionCounter(int questionCounter) {
+        this.questionCounter = questionCounter;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     private int score = 0;//a variable to keep track of scoring
     private int questionCounter = 0; //variable to keep track of what question the user is on.
@@ -41,7 +51,7 @@ public class Quiz {
 
             /*int i = this.getResources().getIdentifier
                     ("questions","raw", this.getPackageName());*/
-            InputStream iStream = ctx.getResources().openRawResource(R.raw.quiz);//This seemed to be the magic line to get it to read the file.
+            InputStream iStream = ctx.getResources().openRawResource(R.raw.easyquiz);//This seemed to be the magic line to get it to read the file.
             InputStreamReader iReader = new InputStreamReader(iStream);
             BufferedReader bReader = new BufferedReader(iReader); //
 
@@ -88,32 +98,27 @@ public class Quiz {
 
         Collections.shuffle(tempAns, new Random(seed2));//shuffles the temparry
 
-        ansvalue=random.nextInt(4) + 1;
+        ansvalue = random.nextInt(4);
 
 
+        for (int i = 0; i < 4; i++) {
 
-        for (int i=0;i<4;i++){
-            if(ansvalue == i){
+
+            if (ansvalue == i) {
                 //handles random button placement of the answer(i hope)
-                int test=0;
+                int test = 0;
                 do {
                     if (qtion.equals(map.get(answer.get(test)))) {
-                     test++;
                         ar.add(answer.get(test));
                     }
                     test++;
 
-
-                }while(!qtion.equals(map.get(answer.get(test)))|| test>9);
-            }
-            else if (qtion.equals(map.get(answer.get(i)))){
+                } while (test <= 9);
+            } else if (qtion.equals(map.get(answer.get(i)))) {
                 ar.add(answer.get(5));//do this to remove duplicate entries of the answer
-
-            }else{
+            } else {
                 ar.add(answer.get(i));
             }
-
-
         }
 
 
@@ -137,9 +142,6 @@ public class Quiz {
         return question.get(num);
     }
 
-    public void setQuestion(ArrayList<String> question) {
-        this.question = question;
-    }
 
     public int getQuestionLimit() {
         return QUESTION_LIMIT;

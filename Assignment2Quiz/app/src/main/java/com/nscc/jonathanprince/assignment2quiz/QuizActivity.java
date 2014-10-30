@@ -98,24 +98,29 @@ public class QuizActivity extends Activity {
 
         try {
             quiz.setQuestionCounter();
-//            questionNumber.setText(quiz.getQuestionCounter());
-            if (quiz.getQuestionCounter() != quiz.getQuestionLimit()) {
+//           questionNumber.setText(quiz.getQuestionCounter());//this breaks stuff for some unknown reason.
+            if (quiz.getQuestionCounter()+1 <= quiz.getQuestionLimit()) {
                 //update score
                 txtScore.setText("Score: " + quiz.getScore() + " out of " + quiz.getQuestionCounter());
 
                 currentQuestion.setText(quiz.getQuestion(quiz.getQuestionCounter()));
                 ArrayList<String> ar= quiz.fourAnswers(currentQuestion.getText().toString());
-
+            try{
                 btnA.setText(ar.get(0));
                 btnB.setText(ar.get(1));
                 btnC.setText(ar.get(2));
                 btnD.setText(ar.get(3));
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
             } else {
 
                 //toast detailing the score and echoing the entered name.
                 Toast.makeText(QuizActivity.this, "Your final score was: " + quiz.getScore() +
-                        ", good job " + defaultName + "!", Toast.LENGTH_LONG).show();
+                       " out of " +quiz.getQuestionCounter()+". Good job " + defaultName + "!", Toast.LENGTH_LONG).show();
 
+                quiz.setScore(0);
+                quiz.setQuestionCounter(0);
                 //send back to first page
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -133,9 +138,8 @@ public class QuizActivity extends Activity {
         //update buttons
     }
 
-    //onclick listener function inputs selected answer for a
+    //onclick listener function inputs selected answer for c
     public void aButton(View v) {
-
         if (quiz.checkAnswer(btnA.getText().toString(),
                 currentQuestion.getText().toString()))
         {
@@ -144,16 +148,14 @@ public class QuizActivity extends Activity {
         } else {
             nextQuestion();
         }
-
-
     }//end aButton listener
 
-    //onclick listener function inputs selected answer for b
+    //onclick listener function inputs selected answer for a
+        //onclick listener function inputs selected answer for b
     public void bButton(View v) {
-        if (quiz.checkAnswer(btnA.getText().toString(),
+        if (quiz.checkAnswer(btnB.getText().toString(),
                 currentQuestion.getText().toString()))
         {
-
             quiz.addScore();
             nextQuestion();
         } else {
@@ -163,7 +165,7 @@ public class QuizActivity extends Activity {
 
     //onclick listener function inputs selected answer for c
     public void cButton(View v) {
-        if (quiz.checkAnswer(btnA.getText().toString(),
+        if (quiz.checkAnswer(btnC.getText().toString(),
                 currentQuestion.getText().toString()))
         {
             quiz.addScore();
@@ -175,7 +177,7 @@ public class QuizActivity extends Activity {
 
     //onclick listener function inputs selected answer for d
     public void dButton(View v) {
-        if (quiz.checkAnswer(btnA.getText().toString(),
+        if (quiz.checkAnswer(btnD.getText().toString(),
                 currentQuestion.getText().toString()))
         {
             quiz.addScore();
