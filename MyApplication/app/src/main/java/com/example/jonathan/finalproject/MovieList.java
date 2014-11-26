@@ -3,6 +3,8 @@ package com.example.jonathan.finalproject;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,9 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ListView;
 
 
 public class MovieList extends Activity {
+
+    private ListView movieList;
+    private Context context;
+    private DatabaseAdapter DBHelper =new DatabaseAdapter(context);
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +30,10 @@ public class MovieList extends Activity {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
+            DatabaseAdapter DB;
+            DB.
+
+
         }
     }
 

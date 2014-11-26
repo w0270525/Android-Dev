@@ -8,7 +8,10 @@ import android.util.Log;
 public class DatabaseAdapter {
     public static final String KEY_ROWID = "_id";
     public static final String KEY_VIDEO = "video";
-    public static final String KEY_TITLE ="title";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_RATING = "rating";
+    public static final String KEY_Description = "description";
+    public static final String KEY_PICTURE = "picture";
     public static final String TAG = "DBAdapter";
 
     private static final String DATABASE_VIDEO = "MyDB";
