@@ -74,7 +74,7 @@ public class DatabaseAdapter {
         return db.insert(DATABASE_TABLE, null, initialValues);
     }
 
-    //delete a particular vidoe
+    //delete a particular video
     public boolean deleteVideo(long rowId)
     {
         return db.delete(DATABASE_TABLE,KEY_ROWID + "=" + rowId,null) >0;
