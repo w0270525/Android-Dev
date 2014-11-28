@@ -48,6 +48,7 @@ public class DatabaseAdapter {
 
         public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion)
         {
+            
             Log.w(TAG,"Upgrade database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS videos");
@@ -69,11 +70,14 @@ public class DatabaseAdapter {
     }
 
     //insert a video into the database
-    public long insertVideo(String video,String title)
+    public long insertVideo(String video,String title, String description, String rating, String picture)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_VIDEO, video);
         initialValues.put(KEY_TITLE, title);
+        initialValues.put(KEY_Description, description);
+        initialValues.put(KEY_RATING, rating);
+        initialValues.put(KEY_PICTURE, picture);
         return db.insert(DATABASE_TABLE, null, initialValues);
     }
 

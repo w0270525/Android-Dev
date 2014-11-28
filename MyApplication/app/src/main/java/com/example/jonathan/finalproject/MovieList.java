@@ -31,7 +31,7 @@ public class MovieList extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
             DatabaseAdapter DB;
-            DB.
+
 
 
         }
