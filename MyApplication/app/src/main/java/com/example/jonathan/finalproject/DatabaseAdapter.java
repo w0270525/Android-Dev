@@ -25,6 +25,7 @@ public class DatabaseAdapter {
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
+
     public DatabaseAdapter(Context ctx)
     {
         DBHelper = new DatabaseHelper(ctx);
