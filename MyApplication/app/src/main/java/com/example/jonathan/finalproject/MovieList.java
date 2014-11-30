@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +23,10 @@ public class MovieList extends Activity {
     private DatabaseAdapter DBHelper =new DatabaseAdapter(context);
     private SQLiteDatabase db;
 
+    //gets the name of the movie file prepopulated in the strings folder.
+    Resources res = getResources();
+    String[] moviefiles = res.getStringArray(R.array.moviefiles);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +38,7 @@ public class MovieList extends Activity {
             DatabaseAdapter DB;
 
 
+            createNewDatabase();
 
         }
     }
@@ -74,5 +80,13 @@ public class MovieList extends Activity {
             View rootView = inflater.inflate(R.layout.fragment_movie_list, container, false);
             return rootView;
         }
+    }
+    //creates new database and loops through array of available movies.
+    private void createNewDatabase() {
+
+        DatabaseAdapter db = null;
+
+
+
     }
 }

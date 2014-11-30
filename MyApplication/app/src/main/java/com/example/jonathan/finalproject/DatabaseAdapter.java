@@ -20,7 +20,7 @@ public class DatabaseAdapter {
 
     private static final String DATABASE_CREATE =
             "create table videos(_id integer primary key autoincrement,"
-                    + "video text not null,title text not null);";
+                    + "video text not null, title text not null, rating integer default 0, description text, picture text);";
 
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;

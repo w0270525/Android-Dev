@@ -10,4 +10,10 @@
     <string name="playBtn">Play</string>
     <string name="editBtn">Edit</string>
 
+    <string-array name="moviefiles">
+        <item>batmanandrobin</item>
+        <item>moronmovies</item>
+        <item>mybosssdaughter</item>
+
+    </string-array>
 </resources>
