@@ -10,7 +10,13 @@
     <string name="playBtn">Play</string>
     <string name="editBtn">Edit</string>
     <string name="addMovieText">Add a Movie</string>
+    <string name="selectPhoto">Select a Photo for the Movie</string>
+    <string name="enterNewTitleText">Enter the Title of the Movie</string>
+    <string name="enterMovieDescription">Enter Movie Description</string>
+    <string name="addMovieBtn">Add Movie</string>
 
+
+    <!-- string-array's to get the database set-up first run through -->
     <string-array name="moviefiles">
         <item>batmanandrobin</item>
         <item>moronmovies</item>
@@ -20,5 +26,15 @@
         <item>batmanpic</item>
         <item>moronpic</item>
         <item>mybosspic</item>
+    </string-array>
+    <string-array name="moviedescriptions">
+        <item>Batman &amp; Robin try to keep their relationship together even as they must stop Mr. Freeze and Poison Ivy from freezing Gotham City.</item>
+        <item>A collection of oddball "home movies".</item>
+        <item>When a young man agrees to housesit for his boss, he thinks it'll be the perfect opportunity to get close to the woman he desperately has a crush on - his boss's daughter. But he doesn't plan on the long line of other houseguests that try to keep him from his mission. And he also has to deal with the daughter's older brother, who's on the run from local drug dealers.</item>
+    </string-array>
+    <string-array name="movietitles">
+        <item>Batman &amp; Robin</item>
+        <item>Moron Movies</item>
+        <item>My Boss's Daughter</item>
     </string-array>
 </resources>

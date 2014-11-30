@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 
 /**
@@ -18,6 +19,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class AddMovie extends Fragment {
+
+    //spinner for selecting movie file.
+    private Spinner movieSpinner;
+    private Spinner pictureSpinner;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
