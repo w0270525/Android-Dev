@@ -9,11 +9,16 @@
     <string name="descriptionTextView">placeholder description</string>
     <string name="playBtn">Play</string>
     <string name="editBtn">Edit</string>
+    <string name="addMovieText">Add a Movie</string>
 
     <string-array name="moviefiles">
         <item>batmanandrobin</item>
         <item>moronmovies</item>
         <item>mybosssdaughter</item>
-
+    </string-array>
+    <string-array name="picturefiles">
+        <item>batmanpic</item>
+        <item>moronpic</item>
+        <item>mybosspic</item>
     </string-array>
 </resources>
