@@ -26,18 +26,18 @@
         android:layout_below="@+id/pictureView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp" />
+        android:layout_marginTop="33dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/descriptionTextView"
         android:id="@+id/descriptionText"
+        android:layout_marginTop="21dp"
+        android:minWidth="25dp"
         android:layout_below="@+id/titleText"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
-        android:minWidth="25dp" />
+        android:layout_alignParentStart="true" />
 
     <RatingBar
         android:layout_width="wrap_content"
