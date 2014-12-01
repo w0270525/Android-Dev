@@ -18,6 +18,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MovieDetails extends Fragment {
+
+    //self entered.
+    private int key_id;//for getting the id of the entry to display.
+    
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

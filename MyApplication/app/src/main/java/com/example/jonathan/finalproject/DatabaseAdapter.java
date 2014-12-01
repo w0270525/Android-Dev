@@ -4,6 +4,7 @@ import android.content.*;
 import android.database.*;
 import android.database.sqlite.*;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DatabaseAdapter {
     public static final String KEY_ROWID = "_id";
@@ -113,6 +114,18 @@ public class DatabaseAdapter {
         ContentValues cval = new ContentValues();
         cval.put(KEY_VIDEO, video);
         cval.put(KEY_TITLE, title);
+        return db.update(DATABASE_TABLE, cval, KEY_ROWID + "=" + rowId,null) >0;
+    }
+
+    //updates a rating
+    public boolean updateRating(long rowId, int rating, Context ctx)
+    {
+        ContentValues cval = new ContentValues();
+        cval.put(KEY_RATING, rating);
+
+
+        Toast.makeText(ctx, "Rating applied.", Toast.LENGTH_SHORT).show();
+
         return db.update(DATABASE_TABLE, cval, KEY_ROWID + "=" + rowId,null) >0;
     }
 
