@@ -37,3 +37,18 @@ public class PlayMovie extends Activity {
         return super.onOptionsItemSelected(item);
     }
 }
+//Hi folks,
+//
+//Here is an easy way (not the only way) to grab the movie files from raw if you were still having trouble:
+//
+//        String video = currentMovie.getTrailer();
+//
+//        int id = this.getResources().getIdentifier(video, "raw", this.getPackageName());
+//
+//        String videoPath = "android.resource://" + getPackageName() + "/" + id;
+//
+//        playerObj.setVideoURI(Uri.parse(videoPath));
+//
+//        Hope that helps
+//
+//        David R

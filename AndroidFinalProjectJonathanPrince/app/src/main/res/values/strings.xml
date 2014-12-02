@@ -26,10 +26,10 @@
         <item>thirteenghosts</item>
     </string-array>
     <string-array name="picturefiles">
-        <item>batmanpic</item>
-        <item>moronpic</item>
-        <item>mybosspic</item>
-        <item>thirteenpic</item>
+        <item>R.drawable.batmanpic</item>
+        <item>R.drawable.moronpic</item>
+        <item>R.drawable.mybosspic</item>
+        <item>R.drawable.thirteenpic</item>
     </string-array>
     <string-array name="moviedescriptions">
         <item>Batman &amp; Robin try to keep their relationship together even as they must stop Mr. Freeze and Poison Ivy from freezing Gotham City.</item>
