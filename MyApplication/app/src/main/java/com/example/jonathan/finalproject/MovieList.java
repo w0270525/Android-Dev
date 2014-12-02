@@ -1,7 +1,6 @@
 package com.example.jonathan.finalproject;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Resources;
@@ -12,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.ListView;
 
 
@@ -26,6 +24,12 @@ public class MovieList extends Activity {
     //gets the name of the movie file prepopulated in the strings folder.
     Resources res = getResources();
     String[] moviefiles = res.getStringArray(R.array.moviefiles);
+    String[] movietitles=res.getStringArray(R.array.movietitles);
+    String[] moviepicture =res.getStringArray(R.array.picturefiles);
+    String[] moviedescription = res.getStringArray(R.array.moviedescriptions);
+
+
+    private final static int NUMBER_OF_MOVIES = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +87,15 @@ public class MovieList extends Activity {
     }
     //creates new database and loops through array of available movies.
     private void createNewDatabase() {
+        Context ctx= getApplicationContext();
+        DatabaseAdapter db=new DatabaseAdapter(ctx);
+        db.open();
+        //loop through items
 
-        DatabaseAdapter db = null;
+        for (int i=0; i < NUMBER_OF_MOVIES -1; i++) {
+            //insertVideo(String video,String title, String description, String rating, String picture)
+            db.insertVideo(moviefiles[i], movietitles[i], moviedescription[i], 0, moviepicture[i]);
+        }
 
 
 

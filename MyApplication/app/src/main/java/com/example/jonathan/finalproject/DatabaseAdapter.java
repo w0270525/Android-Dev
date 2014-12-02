@@ -32,6 +32,8 @@ public class DatabaseAdapter {
         DBHelper = new DatabaseHelper(ctx);
     }
 
+
+
     private static class DatabaseHelper extends SQLiteOpenHelper
     {
         DatabaseHelper(Context context)
@@ -72,7 +74,7 @@ public class DatabaseAdapter {
     }
 
     //insert a video into the database
-    public long insertVideo(String video,String title, String description, String rating, String picture)
+    public long insertVideo(String video,String title, String description, int rating, String picture)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_VIDEO, video);

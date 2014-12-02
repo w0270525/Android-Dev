@@ -1,12 +1,14 @@
 package com.example.jonathan.finalproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 
 
 /**
@@ -21,6 +23,10 @@ public class MovieDetails extends Fragment {
 
     //self entered.
     private int key_id;//for getting the id of the entry to display.
+
+    RatingBar ratingBar;
+
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -109,6 +115,15 @@ public class MovieDetails extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+
+    //to set the rating when the rating bar is clicked.
+    private void setMovieRating(RatingBar ratingBar, long movieId) {
+        int rating = ratingBar.getNumStars();
+        Context ctx = null;
+        DatabaseAdapter db = new DatabaseAdapter(ctx);
+        db.updateRating(movieId, rating, ctx);
     }
 
 }
