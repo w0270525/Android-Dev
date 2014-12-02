@@ -39,10 +39,19 @@ public class MovieList extends Activity {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
-            DatabaseAdapter DB;
 
+            Context ctx = getApplicationContext();
+            DatabaseAdapter DB = new DatabaseAdapter(ctx);
 
-            createNewDatabase();
+            DB.open();
+
+            try {
+                createNewDatabase();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            DB.close();
 
         }
     }
@@ -92,9 +101,10 @@ public class MovieList extends Activity {
         db.open();
         //loop through items
 
+        //intentionally one short of number of movies to allow one to be not included for the assignment.
         for (int i=0; i < NUMBER_OF_MOVIES -1; i++) {
-            //insertVideo(String video,String title, String description, String rating, String picture)
-            db.insertVideo(moviefiles[i], movietitles[i], moviedescription[i], 0, moviepicture[i]);
+
+            db.insertVideo(moviefiles[i], movietitles[i], moviedescription[i], moviepicture[i]);
         }
 
 

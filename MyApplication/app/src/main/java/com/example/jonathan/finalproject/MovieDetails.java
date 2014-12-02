@@ -69,6 +69,7 @@ public class MovieDetails extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -121,7 +122,7 @@ public class MovieDetails extends Fragment {
     //to set the rating when the rating bar is clicked.
     private void setMovieRating(RatingBar ratingBar, long movieId) {
         int rating = ratingBar.getNumStars();
-        Context ctx = null;
+        Context ctx= getApplicationContext();
         DatabaseAdapter db = new DatabaseAdapter(ctx);
         db.updateRating(movieId, rating, ctx);
     }

@@ -1,8 +1,11 @@
-package com.example.jonathan.finalproject;
+package com.example.jonathan.androidfinalprojectjonathanprince;
 
-import android.content.*;
-import android.database.*;
-import android.database.sqlite.*;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
