@@ -1,17 +1,28 @@
 package com.example.jonathan.androidfinalprojectjonathanprince;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.VideoView;
+
+import java.net.URI;
 
 
 public class PlayMovie extends Activity {
+
+    VideoView videoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_movie);
+        videoView=(VideoView)findViewById(R.id.videoView);
+
+
+
     }
 
 
@@ -36,6 +47,15 @@ public class PlayMovie extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void goBackOnClick(View view) {
+    }
+
+    public void playOnClick(View view) {
+
+
+
+    }
 }
 //Hi folks,
 //
@@ -52,3 +72,14 @@ public class PlayMovie extends Activity {
 //        Hope that helps
 //
 //        David R
+
+//VideoView videoView;
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.main);
+//        videoView = (VideoView)findViewById(R.id.VideoView);
+//        videoView.setVideoPath("/sdcard/blonde_secretary.3gp");
+//        videoView.start();
+//    }

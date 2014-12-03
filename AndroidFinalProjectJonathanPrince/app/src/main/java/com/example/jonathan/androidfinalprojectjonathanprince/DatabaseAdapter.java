@@ -104,7 +104,7 @@ public class DatabaseAdapter {
     public Cursor getVideo(long rowId) throws SQLException
     {
         Cursor mCursor = db.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,
-                KEY_VIDEO,KEY_TITLE},KEY_ROWID + "=" + rowId,null,null,null,null,null);
+                KEY_VIDEO,KEY_TITLE, KEY_Description, KEY_PICTURE},KEY_ROWID + "=" + rowId,null,null,null,null,null);
         if(mCursor != null)
         {
             mCursor.moveToFirst();
@@ -131,6 +131,16 @@ public class DatabaseAdapter {
         Toast.makeText(ctx, "Rating applied.", Toast.LENGTH_SHORT).show();
 
         return db.update(DATABASE_TABLE, cval, KEY_ROWID + "=" + rowId,null) >0;
+    }
+
+    public int getProfilesCount() {
+        String countQuery = "SELECT  * FROM " + DATABASE_TABLE;
+        open();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        close();
+        return cnt;
     }
 
 }//end class DBAdapter

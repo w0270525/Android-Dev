@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
 
 import java.lang.reflect.Field;
 
@@ -23,12 +23,12 @@ public class MainActivity extends Activity {
     private final static int MOVIES_TO_LOAD=4;
 
     int moviestolist=MOVIES_TO_LOAD;
-    private ListView movieList;
 
     int movieId;
 
 
 
+    //string arrays for storing initial values to the database.
     String[] moviefiles;
     String[] movietitles;
     String[] moviepicture;
@@ -68,24 +68,33 @@ public class MainActivity extends Activity {
                 }
 
 
-                moviepic[i]= getResId(moviepicture[i], Drawable.class);
+
             }
 
             db_loaded = true;
 
         }
 
+        moviestolist = dba.getProfilesCount();//returns the number of rows
+        for (int i =0; i < moviestolist; i++) {
+            moviepic[i] = getResId(moviepicture[i], Drawable.class);
+        }
+
 
 
         CustomList adapter = new CustomList(MainActivity.this, movietitles, moviepic);
-        movieList = (ListView) findViewById(R.id.movieList);
+
+        ListView movieList = (ListView) findViewById(R.id.movieList);
+
         movieList.setAdapter(adapter);
+
+        //onclick for the list
         movieList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent =new Intent(ctx, AddMovie.class);
-                intent.putExtra("movieId",movieId);
+                Intent intent = new Intent(ctx, MovieDetails.class);
+                intent.putExtra("movieId", movieId);
 
                 try {
                     startActivity(intent);
@@ -93,7 +102,6 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
 
                 }
-
 
 
             }

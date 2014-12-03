@@ -50,5 +50,6 @@
     <string name="MoviePosterDescription">Movie Poster Description</string>
     <string name="title_activity_play_movie">PlayMovie</string>
     <string name="deleteButton">Delete</string>
+    <string name="backBtn">Go Back</string>
 
 </resources>

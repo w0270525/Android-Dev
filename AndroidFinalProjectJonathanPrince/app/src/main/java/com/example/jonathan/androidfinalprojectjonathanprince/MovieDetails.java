@@ -3,7 +3,9 @@ package com.example.jonathan.androidfinalprojectjonathanprince;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.SQLException;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +15,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
+
 
 public class MovieDetails extends Activity {
     ImageView pictureView;
@@ -20,7 +24,7 @@ public class MovieDetails extends Activity {
     TextView descriptionText;
     RatingBar ratingBar;
 
-    private int movieId = -1;
+    private long movieId = -1;
 
 
     @Override
@@ -28,11 +32,18 @@ public class MovieDetails extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
-        //=(RatingBar)findViewById(R.id.movieRating);
+        Bundle extras= getIntent().getExtras();
+        movieId = extras.getLong("movieId");
 
+        DatabaseAdapter dba = new DatabaseAdapter(this);
+        dba.open();
+        //gets one record and places it in the cursor
+        Cursor cursor = dba.getVideo(movieId);
+        titleText.setText(cursor.getString(3));
+        descriptionText.setText(cursor.getString(4));
+        pictureView.setImageResource(getResId(cursor.getString(5), Drawable.class));
 
-
-
+        dba.close();
     }
 
 
@@ -103,6 +114,16 @@ public class MovieDetails extends Activity {
             Toast.makeText(this,"Error editing movie.", Toast.LENGTH_SHORT).show();
         }
 
+    }
+    public static int getResId(String variableName, Class<?> c) {
+
+        try {
+            Field idField = c.getDeclaredField(variableName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }
 //EditText editText = (EditText) findViewById(R.id.editName);
