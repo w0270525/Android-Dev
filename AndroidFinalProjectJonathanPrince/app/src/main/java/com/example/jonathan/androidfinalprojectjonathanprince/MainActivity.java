@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 
 import android.database.Cursor;
+import android.database.SQLException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,7 +35,7 @@ public class MainActivity extends Activity {
     String[] title;
 
     Context ctx;
-    public DatabaseAdapter dba=new DatabaseAdapter(ctx);
+    public DatabaseAdapter dba;
 
 
     @Override
@@ -43,6 +44,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
 
+        dba =new DatabaseAdapter(this);
 
         //gets the name of the movie file pre-populated in the strings folder.
         Resources res = getResources();
@@ -54,6 +56,11 @@ public class MainActivity extends Activity {
         if (!db_loaded) {
 
 
+            try {
+                dba.open();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             //creates the info in the database(intentionally one less than total for project req.)
             for (int i = 0; i < MOVIES_TO_LOAD - 1; i++) {
                 //public long insertVideo(String video,String title, String description, String picture)
@@ -66,6 +73,7 @@ public class MainActivity extends Activity {
 
 
             }
+            dba.close();
 
             db_loaded = true;
 
@@ -73,7 +81,8 @@ public class MainActivity extends Activity {
 
         moviestolist = dba.getProfilesCount();//returns the number of rows
         for (int i =0; i < moviestolist; i++) {
-            moviepic[i] = getResId(moviepicture[i], Drawable.class);
+            Cursor cur = dba.getAllFilmThumbs();
+            moviepic[i] = getResId(cur.getString(5), Drawable.class);
         }
 
         Cursor cursor = dba.getAllVideo();

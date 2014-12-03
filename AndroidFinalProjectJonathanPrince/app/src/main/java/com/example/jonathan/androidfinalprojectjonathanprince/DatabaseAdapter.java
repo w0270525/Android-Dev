@@ -121,6 +121,15 @@ public class DatabaseAdapter {
         return db.update(DATABASE_TABLE, cval, KEY_ROWID + "=" + rowId,null) >0;
     }
 
+    public Cursor getAllFilmThumbs(){
+        return db.query(DATABASE_TABLE,new String[]{KEY_ROWID,KEY_VIDEO,
+                KEY_TITLE},null,null,null,null,null);
+        // build a string array
+        // return string array.
+
+
+    }
+
     //updates a rating
     public boolean updateRating(long rowId, int rating, Context ctx)
     {
