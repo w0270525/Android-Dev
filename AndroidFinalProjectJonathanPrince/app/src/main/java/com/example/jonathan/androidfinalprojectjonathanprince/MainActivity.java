@@ -2,30 +2,37 @@ package com.example.jonathan.androidfinalprojectjonathanprince;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
+
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.lang.reflect.Field;
 
 
 public class MainActivity extends Activity {
-    static boolean db_loaded = false;
+
+    static boolean db_loaded = false;//to allow the db to only be loaded once.
     private final static int MOVIES_TO_LOAD=4;
 
+    int moviestolist=MOVIES_TO_LOAD;
     private ListView movieList;
 
+    int movieId;
 
 
-    //gets the name of the movie file prepopulated in the strings folder.
-    Resources res = getResources();
-    String[] moviefiles = res.getStringArray(R.array.moviefiles);
-    String[] movietitles=res.getStringArray(R.array.movietitles);
-    String[] moviepicture =res.getStringArray(R.array.picturefiles);
-    String[] moviedescription = res.getStringArray(R.array.moviedescriptions);
+
+    String[] moviefiles;
+    String[] movietitles;
+    String[] moviepicture;
+    String[] moviedescription;
 
 
 
@@ -39,30 +46,54 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(!db_loaded){
+        Integer[] moviepic=new Integer[moviestolist];
+
+        //gets the name of the movie file pre-populated in the strings folder.
+        Resources res = getResources();
+        moviefiles = res.getStringArray(R.array.moviefiles);
+        movietitles=res.getStringArray(R.array.movietitles);
+        moviepicture =res.getStringArray(R.array.picturefiles);
+        moviedescription = res.getStringArray(R.array.moviedescriptions);
+
+        if (!db_loaded) {
+
 
             //creates the info in the database(intentionally one less than total for project req.)
-            for(int i=0; i< MOVIES_TO_LOAD-1; i++){
+            for (int i = 0; i < MOVIES_TO_LOAD - 1; i++) {
                 //public long insertVideo(String video,String title, String description, String picture)
                 try {
                     dba.insertVideo(moviefiles[i], movietitles[i], moviedescription[i], moviepicture[i]);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                int[] moviepic.
 
 
+                moviepic[i]= getResId(moviepicture[i], Drawable.class);
             }
 
-            db_loaded=true;
+            db_loaded = true;
+
         }
-        CustomList adapter = new CustomList(MainActivity.this, movietitles, moviepicture);
-        movieList=(ListView)findViewById(R.id.movieList);
+
+
+
+        CustomList adapter = new CustomList(MainActivity.this, movietitles, moviepic);
+        movieList = (ListView) findViewById(R.id.movieList);
         movieList.setAdapter(adapter);
         movieList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+
+                Intent intent =new Intent(ctx, AddMovie.class);
+                intent.putExtra("movieId",movieId);
+
+                try {
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+
 
 
             }
@@ -90,5 +121,17 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //http://stackoverflow.com/questions/4427608/android-getting-resource-id-from-string
+    public static int getResId(String variableName, Class<?> c) {
+
+        try {
+            Field idField = c.getDeclaredField(variableName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

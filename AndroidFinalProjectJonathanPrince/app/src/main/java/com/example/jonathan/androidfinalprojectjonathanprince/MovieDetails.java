@@ -20,7 +20,7 @@ public class MovieDetails extends Activity {
     TextView descriptionText;
     RatingBar ratingBar;
 
-    private int movieId;
+    private int movieId = -1;
 
 
     @Override
@@ -29,6 +29,7 @@ public class MovieDetails extends Activity {
         setContentView(R.layout.activity_movie_details);
 
         //=(RatingBar)findViewById(R.id.movieRating);
+
 
 
 
@@ -92,7 +93,15 @@ public class MovieDetails extends Activity {
     }
 
     public void editBtn(View view) {
+        Intent intent =new Intent(this, AddMovie.class);
+        intent.putExtra("movieId",movieId);
 
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this,"Error editing movie.", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }
