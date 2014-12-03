@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,21 +22,16 @@ public class MainActivity extends Activity {
 
     static boolean db_loaded = false;//to allow the db to only be loaded once.
     private final static int MOVIES_TO_LOAD=4;
-
     int moviestolist=MOVIES_TO_LOAD;
-
     int movieId;
-
-
 
     //string arrays for storing initial values to the database.
     String[] moviefiles;
     String[] movietitles;
     String[] moviepicture;
     String[] moviedescription;
-
-
-
+    Integer[] moviepic;
+    String[] title;
 
     Context ctx;
     public DatabaseAdapter dba=new DatabaseAdapter(ctx);
@@ -46,7 +42,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Integer[] moviepic=new Integer[moviestolist];
+
 
         //gets the name of the movie file pre-populated in the strings folder.
         Resources res = getResources();
@@ -80,9 +76,14 @@ public class MainActivity extends Activity {
             moviepic[i] = getResId(moviepicture[i], Drawable.class);
         }
 
+        Cursor cursor = dba.getAllVideo();
+       for (int i=0; i< dba.getProfilesCount(); i++)
+       {
+           title[i]=cursor.getString(3);
+           moviepic[i]=getResId(cursor.getString(5), Drawable.class);
+       }
 
-
-        CustomList adapter = new CustomList(MainActivity.this, movietitles, moviepic);
+        CustomList adapter = new CustomList(MainActivity.this, title, moviepic);
 
         ListView movieList = (ListView) findViewById(R.id.movieList);
 

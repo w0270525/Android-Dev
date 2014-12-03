@@ -23,6 +23,7 @@ public class MovieDetails extends Activity {
     TextView titleText;
     TextView descriptionText;
     RatingBar ratingBar;
+    String video;
 
     private long movieId = -1;
 
@@ -42,6 +43,7 @@ public class MovieDetails extends Activity {
         titleText.setText(cursor.getString(3));
         descriptionText.setText(cursor.getString(4));
         pictureView.setImageResource(getResId(cursor.getString(5), Drawable.class));
+        video = cursor.getString(2);
 
         dba.close();
     }
@@ -91,6 +93,7 @@ public class MovieDetails extends Activity {
 
 
         Intent intent =new Intent(this, PlayMovie.class);
+        intent.putExtra("video",video);
         intent.putExtra("movieId",movieId);
 
         try {

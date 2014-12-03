@@ -1,6 +1,7 @@
 package com.example.jonathan.androidfinalprojectjonathanprince;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,13 +15,19 @@ import java.net.URI;
 public class PlayMovie extends Activity {
 
     VideoView videoView;
+    String videoIn;
+    String movieId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_movie);
-        videoView=(VideoView)findViewById(R.id.videoView);
 
+        //sets video in to the movie that needs to be played from the previous screen.
+        videoView=(VideoView)findViewById(R.id.videoView);
+        Bundle extras = getIntent().getExtras();
+        videoIn= extras.getString("video");
+        movieId=extras.getString("movieId");
 
 
     }
@@ -48,12 +55,32 @@ public class PlayMovie extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    //goes back to the previous screen.
     public void goBackOnClick(View view) {
+
+        Intent intent = new Intent(this, MovieDetails.class);
+        intent.putExtra("movieId", movieId);
+
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
     }
 
+    //starts playing the video when pressed
     public void playOnClick(View view) {
 
+        String video = videoIn;
+        videoView.findViewById(R.id.videoView);
+        int id = this.getResources().getIdentifier(video, "raw", this.getPackageName());
 
+        String videoPath = "android.resource://" + getPackageName() + "/" + id;
+        videoView.setVideoURI(Uri.parse(videoPath));
+        videoView.start();
 
     }
 }
